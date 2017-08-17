@@ -5,8 +5,11 @@ RUN wget "https://caddyserver.com/download/linux/amd64?plugins=${plugins}" -O - 
     && chmod 0755 /usr/bin/caddy \
     && /usr/bin/caddy -version
 
-WORKDIR /srv
+COPY Caddyfile.template entrypoint.sh /
+
 EXPOSE 80 443
-ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
+ENV SITE "http://localhost"
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/caddy", "--conf", "/etc/Caddyfile", "--log", "stdout"]
 
