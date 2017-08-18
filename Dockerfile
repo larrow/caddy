@@ -8,7 +8,7 @@ RUN wget "https://caddyserver.com/download/linux/amd64?plugins=${plugins}" -O - 
 COPY Caddyfile.template entrypoint.sh /
 
 EXPOSE 80 443
-ENV SITE "http://localhost"
+ENV SITE ""
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/caddy", "--conf", "/etc/Caddyfile", "--log", "stdout"]
